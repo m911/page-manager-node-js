@@ -1,0 +1,29 @@
+{
+  "name": "page-manager-node",
+  "version": "1.0.0",
+  "description": "The app for managing pages",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build/ && tsc",
+    "start": "node build/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "page-manager-node"
+  },
+  "author": "Dimitar Varzilov",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.8.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "typescript": "^4.9.5"
+  }
+}
