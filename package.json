@@ -1,5 +1,5 @@
 {
-  "name": "page-manager-node",
+  "name": "page-manager-node-js",
   "version": "1.0.0",
   "description": "The app for managing pages",
   "main": "index.js",
