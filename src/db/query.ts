@@ -18,4 +18,6 @@ pool.query("SELECT * FROM PagesData", (err: any, result: any, fields: any) => {
   return result;
 });
 
+pool.
+
 module.exports = pool;
