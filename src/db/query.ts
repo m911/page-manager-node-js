@@ -1,23 +1,36 @@
-import Logger from "../library/Logger";
+import createPool from "mysql";
+import mysql from "mysql";
+import { NextFunction, Request } from "express";
 
-const createPool = require("mysql");
-
-const pool = createPool({
-  host: "localhost",
-  user: "admin",
-  password: "",
-  database: "NodeDb",
-  connectionLimit: 10,
-  // port: 5432,
+const pool = mysql.createPool({
+	host: "localhost",
+	// user: "admin",
+	// password: "",
+	database: "NodeDb",
+	connectionLimit: 10,
+	multipleStatements: true,
+	// port: 5432,
 });
 
-pool.query("SELECT * FROM PagesData", (err: any, result: any, fields: any) => {
-  if (err) {
-    return Logger.error(err);
-  }
-  return result;
-});
+export function getPage(url: string, req: Request): any {
+	pool.getConnection(function (err: any, connection: any) {
+		if (err) {
+			console.log(err);
+			throw new Error(err.message);
+		}
 
-pool.
-
-module.exports = pool;
+		//If connection is successfully established
+		pool.query(
+			`SELECT * FROM PagesData WHERE url = ${url} OR id = ${req.params.id}`,
+			(err: any, rows: any) => {
+				if (err) {
+					console.error(err);
+					throw new Error(err.message);
+				}
+				connection.release();
+				return rows;
+			}
+		);
+	});
+}
+module.exports = { getPage };
