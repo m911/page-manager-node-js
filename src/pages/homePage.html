@@ -1,12 +1,4 @@
-import ILoginCredentials from "../models/loginCredentials";
-import IPage from "../models/pageModel";
-
-export const mockDb: IPage[] = [
-	{
-		id: 0,
-		title: "Home",
-		metaData: `homepage`,
-		pageContent: `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -68,34 +60,4 @@ export const mockDb: IPage[] = [
     </main>
 </body>
 
-</html>`,
-		url: "home",
-	},
-	{
-		id: 1,
-		title: "Login",
-		metaData: `loginPage`,
-		pageContent: `<form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">User name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword">
-            </div>
-            <button type="button" onclick="handleLogin()" class="btn btn-primary">Submit</button>
-        </form>`,
-		url: "login",
-	},
-];
-
-export const userLoginCredentials: ILoginCredentials[] = [
-	{
-		username: "Mitko",
-		password: "1234",
-	},
-];
-
-export const authenticatedUsers: ILoginCredentials[] = [];
+</html>
