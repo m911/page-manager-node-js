@@ -15,8 +15,8 @@ export default function renderer(
 		const path = CONFIG.ROOT_PATH + "/pages/test.html";
 		writeFileSync(path, options.pageContent);
 		const file = readFileSync(path);
-		// res.write(file);
-		res.write(options.pageContent);
+		res.write(file);
+		// res.write(options.pageContent);
 		res.end();
 	} else {
 		res.render(

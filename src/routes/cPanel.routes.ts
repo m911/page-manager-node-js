@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { mockDb } from "../db/mockDb";
 import { passwordHasher } from "../auth/passHasher";
-import authenticateUser from "../auth/authenticateToken";
+import authenticateUser from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/tokenGenerate";
 import { readFileSync } from "fs";
