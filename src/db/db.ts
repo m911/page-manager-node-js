@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+import ILoginCredentials from "../models/ILoginCredentials";
+import IPage from "../models/IPage";
+
+export const pagesDb: IPage[] = [
+	{
+		id: 0,
+		metaData: "Navbar",
+		pageContent: "",
+		parts: {
+			first: `<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -8,7 +17,6 @@
     <title>Welcome</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -46,18 +54,62 @@
                         <a class="nav-link disabled">Disabled</a>
                     </li>
                 </ul>
-                <a href="/login" class="btn btn-outline-success" id="adminPanelBtn">Login</a>
+                <a href="/login" class="btn btn-outline-success" id="adminPanelBtn" type="button">Login</a>
             </div>
         </div>
     </nav>
-    <main id="pageContent" class="container">
-
-
+    <main id="pageContent" class="container">`,
+			second: `
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <script src="index.js"></script>
 </body>
 
-</html>
+</html>`,
+		},
+		title: `Welcome`,
+		url: ``,
+	},
+	{
+		id: 1,
+		title: "Home",
+		metaData: `homepage`,
+		pageContent: ``,
+		url: "home",
+	},
+	{
+		id: 2,
+		title: "Login",
+		metaData: `loginPage`,
+		pageContent: `<form>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">User name</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword">
+    </div>
+    <button type="button" onclick="handleLogin()" class="btn btn-primary">Submit</button>
+    </form>`,
+		url: "login",
+	},
+	{
+		id: 3,
+		metaData: "Sucessfully logged in",
+		pageContent: `<h1>Login Succesfullly</h1>`,
+		title: "Sucessfully logged in",
+		url: "/loginSuccess",
+	},
+];
+
+export const userLoginCredentials: ILoginCredentials[] = [
+	{
+		username: "Mitko",
+		password: "1234",
+	},
+];
+
+export const authenticatedUsers: ILoginCredentials[] = [];

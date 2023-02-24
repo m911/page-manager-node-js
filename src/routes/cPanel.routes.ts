@@ -1,29 +1,22 @@
 import { Router, Request, Response } from "express";
-import { mockDb } from "../db/mockDb";
+import { pagesDb } from "../db/db";
 import { passwordHasher } from "../auth/passHasher";
-import authenticateUser from "../middleware/authenticateToken";
+import authenticateToken from "../auth/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
-import generateToken from "../auth/tokenGenerate";
+import generateToken from "../auth/generateToken";
 import { readFileSync } from "fs";
 import { CONFIG } from "../config/CONFIG";
 import renderer from "../utils/renderer";
-
+import { body, validationResult } from "express-validator";
 const cPanelRouter = Router();
 
-cPanelRouter.get("/", authenticateUser, (req: Request, res: Response) => {
-	res.status(200).send("Access granted");
+cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
+	res.status(200).write("Access granted");
+	res.end();
 });
 
 cPanelRouter.get("/login", (req: Request, res: Response) => {
-	const pageContent: string = mockDb[1].pageContent;
-	const pageContent2 = readFileSync(
-		CONFIG.ROOT_PATH + "/pages/login/index.html"
-	);
-	
-	renderer(res, {
-		writeToFile: true,
-		pageContent: pageContent,
-	});
+	res.sendStatus(404);
 });
 
 cPanelRouter.post("/login", (req: Request, res: Response) => {
@@ -32,10 +25,17 @@ cPanelRouter.post("/login", (req: Request, res: Response) => {
 		res.send(401);
 	} else {
 		passwordHasher(reqBody, res);
-		const oauth = generateToken(reqBody);
-		res.json({ oauth });
-		// .redirect("/cPanel");
+		const accessToken = generateToken(reqBody);
+		const request = new Request(CONFIG.BASE_URL + "/cPanel", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				authorization: "Bearer " + accessToken,
+			},
+		});
+		request.arrayBuffer();
+		// res.redirect(request);
+		// res.redirect("/cPanel",);
 	}
 });
-
 export default cPanelRouter;

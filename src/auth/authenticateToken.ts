@@ -2,7 +2,7 @@ import { error } from "console";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export default function authenticateUser(
+export default function authenticateToken(
 	req: Request,
 	res: Response,
 	next: NextFunction

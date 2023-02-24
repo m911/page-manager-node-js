@@ -13,7 +13,8 @@ const generateToken = (user: ILoginCredentials) => {
 		expires_in: process.env.EXPIRESIN,
 		token_type: "Bearer",
 	};
-	return response;
+	return token;
+	// return response;
 };
 
 export default generateToken;

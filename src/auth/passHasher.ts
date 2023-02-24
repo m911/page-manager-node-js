@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import { NextFunction, response } from "express";
 import ILoginCredentials from "../models/ILoginCredentials";
-import { authenticatedUsers, userLoginCredentials } from "../db/mockDb";
+import { authenticatedUsers, userLoginCredentials } from "../db/db";
 import { Request, Response } from "express";
-import generateToken from "./tokenGenerate";
+import generateToken from "./generateToken";
 
 export const passwordHasher = (req: ILoginCredentials, res: Response) => {
 	if (req.password == null || req.username == null) {
