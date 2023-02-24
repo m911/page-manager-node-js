@@ -1,29 +1,20 @@
 import { Router, Request, Response } from "express";
-import { mockDb, userLoginCredentials } from "../db/mockDb";
-import { passHasher } from "../auth/passHasher";
-import ILoginCredentials from "../models/loginCredentials";
-
-// import { appender } from "../views/homePage";
-import appender from "../utils/appender";
-
+import { mockDb } from "../db/mockDb";
+import renderer from "../utils/renderer";
 const loginRouter = Router();
+import { readFileSync } from "fs";
+import { CONFIG } from "../config/CONFIG";
+CONFIG;
 
 loginRouter.get("/", (req: Request, res: Response) => {
-	// res.send(mockDb[1].pageContent);
-	// appender(mockDb[1].pageContent, res);
-	appender("src\\pages\\loginPage.html", req, res);
-
-	// src\pages\loginPage.html
-});
-
-loginRouter.post("/form", (req: Request, res: Response) => {
-	const reqBody: ILoginCredentials = req.body;
-	if (reqBody == null && !reqBody) {
-		res.send(401);
-	} else {
-		const accessToken = passHasher(reqBody);
-		res.status(200).send(accessToken);
-	}
+	const pageContent: string = mockDb[1].pageContent;
+	const pageContent2 = readFileSync(
+		CONFIG.ROOT_PATH + "/pages/login/index.html"
+	);
+	renderer(res, {
+		writeToFile: true,
+		pageContent: pageContent,
+	});
 });
 
 export default loginRouter;

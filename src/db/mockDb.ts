@@ -1,5 +1,5 @@
-import ILoginCredentials from "../models/loginCredentials";
-import IPage from "../models/pageModel";
+import ILoginCredentials from "../models/ILoginCredentials";
+import IPage from "../models/IPage";
 
 export const mockDb: IPage[] = [
 	{

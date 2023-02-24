@@ -1,19 +1,33 @@
 import bcrypt from "bcrypt";
 import { NextFunction, response } from "express";
-import ILoginCredentials from "../models/loginCredentials";
+import ILoginCredentials from "../models/ILoginCredentials";
 import { authenticatedUsers, userLoginCredentials } from "../db/mockDb";
 import { Request, Response } from "express";
-import tokenGenerate from "./tokenGenerate";
+import generateToken from "./tokenGenerate";
 
-export const passHasher = (req: ILoginCredentials) => {
-	let reqPassword: string = req.password;
-	const hashedPassword = bcrypt.hashSync(req.password, 10);
-	reqPassword = hashedPassword;
-	if (
-		authenticatedUsers.findIndex((item) => item.password == reqPassword) == -1
-	) {
-		authenticatedUsers.push(req);
+export const passwordHasher = (req: ILoginCredentials, res: Response) => {
+	if (req.password == null || req.username == null) {
+		return res.sendStatus(403);
 	}
-	const accessToken = tokenGenerate(req);
-	return { accessToken };
+	const userIndex: number = userLoginCredentials.findIndex(
+		(user) => user.username === req.username && user.password === req.password
+	);
+	if (userIndex === -1) {
+		return res.status(403).send("Please provide correct login credentials");
+	}
+	const hashedPassword = bcrypt.hashSync(req.password, 10);
+	const dbUser: ILoginCredentials = {
+		username: req.username,
+		password: hashedPassword,
+	};
+	const authUserIndex: number = authenticatedUsers.findIndex(
+		(item) => item.username == req.username
+	);
+	if (authUserIndex == -1) {
+		authenticatedUsers.push(req);
+	} else {
+		authenticatedUsers[authUserIndex] = dbUser;
+	}
+
+	return hashedPassword;
 };

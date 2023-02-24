@@ -1,15 +1,19 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import ILoginCredentials from "../models/loginCredentials";
+import ILoginCredentials from "../models/ILoginCredentials";
 
 dotenv.config();
 
-const tokenGenerate = (user: ILoginCredentials) => {
-	const tokenSecret: string =
-		"ksjfhsdfbdsfkjsdfbhsdlkhfkugh%^%$hgasdklfdkslfsdkjfgjh23t762423ug432jg423j";
-	return jwt.sign({ data: user }, tokenSecret, {
+const generateToken = (user: ILoginCredentials) => {
+	const token = jwt.sign({ data: user.username }, process.env.TOKEN_SECRET!, {
 		expiresIn: process.env.EXPIRESIN,
 	});
+	const response = {
+		access_token: token,
+		expires_in: process.env.EXPIRESIN,
+		token_type: "Bearer",
+	};
+	return response;
 };
 
-export default tokenGenerate;
+export default generateToken;
