@@ -8,7 +8,11 @@ export default function authenticateToken(
 	next: NextFunction
 ) {
 	const authHeader = req.headers.authorization;
-	const token = authHeader && authHeader.split(" ")[1];
+	const queryParam = req.query.access_token?.toString();
+	console.log(queryParam);
+	const token = (authHeader && authHeader.split(" ")[1]) || queryParam;
+	console.log(authHeader && authHeader.split(" ")[1]);
+	console.log(token);
 	if (token == null) {
 		return res.sendStatus(401);
 	}

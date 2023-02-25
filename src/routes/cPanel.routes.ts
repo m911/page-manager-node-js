@@ -26,16 +26,28 @@ cPanelRouter.post("/login", (req: Request, res: Response) => {
 	} else {
 		passwordHasher(reqBody, res);
 		const accessToken = generateToken(reqBody);
-		const request = new Request(CONFIG.BASE_URL + "/cPanel", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/JSON",
-				authorization: "Bearer " + accessToken,
-			},
+		// const request = new Request(CONFIG.BASE_URL + "/cPanel", {
+		// 	method: "GET",
+		// 	headers: {
+		// 		"Content-Type": "application/JSON",
+		// 		authorization: "Bearer " + accessToken,
+		// 	},
+		// });
+		// request.arrayBuffer();
+		// res.send({ accessToken });
+
+		res.header({
+			"Content-Type": "application/JSON",
+			authorization: "Bearer " + accessToken,
 		});
-		request.arrayBuffer();
-		// res.redirect(request);
-		// res.redirect("/cPanel",);
+		res.redirect(`/cPanel`);
 	}
 });
+
+cPanelRouter.get("/oauth", (req: Request, res: Response) => {
+	res.header("Content-Type", "application/json");
+	res.header("authorization", "Bearer " + req.query.access_token);
+	res.redirect(302, `/cPanel`);
+});
+
 export default cPanelRouter;
