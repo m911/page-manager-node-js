@@ -1,52 +1,52 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { pagesDb } from "../db/db";
-import { passwordHasher } from "../auth/passHasher";
-import authenticateToken from "../auth/authenticateToken";
+import { passwordHasher } from "../auth/passwordHasher";
+import authenticateToken from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
-import { readFileSync } from "fs";
-import { CONFIG } from "../config/CONFIG";
-import renderer from "../utils/renderer";
 import { body, validationResult } from "express-validator";
+import { CONFIG } from "../config/CONFIG";
 const cPanelRouter = Router();
+import { checkValidLogin } from "../middleware/checkValidLogin";
+import { cachedDataVersionTag } from "v8";
+
+cPanelRouter.post(
+	"/login",
+	async (req: Request, res: Response, next: NextFunction) => {
+		const reqBody: ILoginCredentials = req.body;
+		console.log(reqBody.username);
+		if (reqBody == null && !reqBody && reqBody) {
+			res.send(401);
+		} else {
+			console.log(reqBody);
+			checkValidLogin(reqBody, res, next);
+			passwordHasher(reqBody, res);
+			const token = generateToken(reqBody);
+			res.cookie("access_token", token);
+			const response = {
+				authorizationType: "Bearer ",
+				auth_token: token,
+			};
+			res.send(response);
+			// res.setHeader("authorization", token);
+			// res.redirect(req.baseUrl);
+			// .redirect(req.baseUrl);
+			// res.redirect(`/oauth`);
+		}
+	}
+);
 
 cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
-	res.status(200).write("Access granted");
-	res.end();
+	res.json({ text: "this is protected text" });
 });
 
 cPanelRouter.get("/login", (req: Request, res: Response) => {
 	res.sendStatus(404);
 });
 
-cPanelRouter.post("/login", (req: Request, res: Response) => {
-	const reqBody: ILoginCredentials = req.body;
-	if (reqBody == null && !reqBody) {
-		res.send(401);
-	} else {
-		passwordHasher(reqBody, res);
-		const accessToken = generateToken(reqBody);
-		// const request = new Request(CONFIG.BASE_URL + "/cPanel", {
-		// 	method: "GET",
-		// 	headers: {
-		// 		"Content-Type": "application/JSON",
-		// 		authorization: "Bearer " + accessToken,
-		// 	},
-		// });
-		// request.arrayBuffer();
-		// res.send({ accessToken });
-
-		res.header({
-			"Content-Type": "application/JSON",
-			authorization: "Bearer " + accessToken,
-		});
-		res.redirect(`/cPanel`);
-	}
-});
-
 cPanelRouter.get("/oauth", (req: Request, res: Response) => {
-	res.header("Content-Type", "application/json");
-	res.header("authorization", "Bearer " + req.query.access_token);
+	// res.header("Content-Type", "application/json");
+	// res.header("authorization", "Bearer " + req.query.access_token);
 	res.redirect(302, `/cPanel`);
 });
 

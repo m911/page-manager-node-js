@@ -3,16 +3,15 @@ import mysql from "mysql";
 import { NextFunction, Request } from "express";
 
 const pool = mysql.createPool({
-	host: "localhost",
-	// user: "admin",
-	// password: "",
+	host: ".",
+	user: "test",
+	password: "test",
 	database: "NodeDb",
 	connectionLimit: 10,
 	multipleStatements: true,
-	// port: 5432,
 });
 
-export function getPage(url: string, req: Request): any {
+export function getOne(url: string, req: Request): any {
 	pool.getConnection(function (err: any, connection: any) {
 		if (err) {
 			console.log(err);
@@ -21,7 +20,7 @@ export function getPage(url: string, req: Request): any {
 
 		//If connection is successfully established
 		pool.query(
-			`SELECT * FROM PagesData WHERE url = ${url} OR id = ${req.params.id}`,
+			`SELECT * FROM PagesData WHERE url = ${url} OR id = ${req.query.id}`,
 			(err: any, rows: any) => {
 				if (err) {
 					console.error(err);
@@ -33,4 +32,4 @@ export function getPage(url: string, req: Request): any {
 		);
 	});
 }
-module.exports = { getPage };
+module.exports = { getPage: getOne };

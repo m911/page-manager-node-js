@@ -9,16 +9,20 @@ export default function authenticateToken(
 ) {
 	const authHeader = req.headers.authorization;
 	const queryParam = req.query.access_token?.toString();
-	console.log(queryParam);
-	const token = (authHeader && authHeader.split(" ")[1]) || queryParam;
-	console.log(authHeader && authHeader.split(" ")[1]);
+	const cookieToken = req.cookies?.get("access_token");
+	const token =
+		(authHeader && authHeader.split(" ")[1]) || queryParam || cookieToken;
+	console.log(cookieToken);
 	console.log(token);
 	if (token == null) {
 		return res.sendStatus(401);
 	}
-	jwt.verify(token, process.env.TOKEN_SECRET!, (err) => {
+	jwt.verify(token, process.env.TOKEN_SECRET!, (err: any, data: any) => {
 		if (err) {
 			return res.sendStatus(403);
+		} else {
+			// req.token = token;
+			// res.json(data);
 		}
 		next();
 	});
