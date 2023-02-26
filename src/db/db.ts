@@ -69,7 +69,7 @@ export const pagesDb: IPage[] = [
 </html>`,
 		},
 		title: `Welcome`,
-		url: ``,
+		url: `/`,
 	},
 	{
 		id: 1,
@@ -101,7 +101,7 @@ export const pagesDb: IPage[] = [
 		metaData: "Sucessfully logged in",
 		pageContent: `<h1>Login Succesfullly</h1>`,
 		title: "Sucessfully logged in",
-		url: "/loginSuccess",
+		url: "loginSuccess",
 	},
 	{
 		id: 4,
@@ -135,7 +135,7 @@ export const pagesDb: IPage[] = [
 
 </html>`,
 		title: "404",
-		url: "/404",
+		url: "404",
 	},
 ];
 

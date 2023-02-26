@@ -8,11 +8,7 @@ loginSuccessRoute.get(
 	"/",
 	authenticateToken,
 	(req: Request, res: Response, next: NextFunction) => {
-		const { pageContent } = pagesDb[3];
-		renderer(res, {
-			writeToFile: true,
-			pageContent: pageContent,
-		});
+		renderer(res, { pageId: 3 });
 	}
 );
 export default loginSuccessRoute;

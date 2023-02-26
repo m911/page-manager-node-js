@@ -3,43 +3,32 @@ import { readFileSync, writeFileSync } from "fs";
 import { CONFIG } from "../config/CONFIG";
 import IRenderer from "../models/IRenderer";
 import { pagesDb } from "../db/db";
+import IPage from "../models/IPage";
 
 export default function renderer(
 	res: Response,
 	options?: {
-		writeToFile?: boolean;
-		pageContent?: Buffer | string | any | undefined;
+		url?: string;
+		pageContent?: Buffer | string | string[] | Buffer[];
+		pageId?: number;
 	}
 ): void {
 	try {
-		if (options && options.writeToFile) {
-			res.setHeader("Content-Type", "text/html");
-			const path = CONFIG.ROOT_PATH + "/pages/test.html";
-			const page = pagesDb[0];
-			writeFileSync(
-				path,
-				page.parts?.first + options.pageContent + page.parts?.second
-			);
-			const file = readFileSync(path);
-			// res.write(file);
-			res.write(
-				path,
-				page.parts?.first + options.pageContent + page.parts?.second
-			);
-			res.end();
-		} else {
-			res.render(
-				"home.ejs",
-				{ pageContent: options?.pageContent }
+		res.setHeader("Content-Type", "text/html");
+		const base = pagesDb.find((p) => p.url === "/")!.parts!;
+		const page: number = options?.pageId
+			? options.pageId
+			: options?.url
+			? pagesDb.findIndex((p) => p.url === options.url)
+			: -1;
 
-				// (err, html) => {
-				// 	{
-				// 		console.log(err);
-				// 		throw new Error(err.message);
-				// 	}
-				// 	// html = mockPage.content;
-				// }
-			);
+		if (page != 1) {
+			res.send(base?.first + pagesDb[page].pageContent + base?.second);
+		} else if (options?.pageContent) {
+			res.send(base.first + options.pageContent + base.second);
+		} else {
+			const notFound = pagesDb.find((p) => p.url === "404")!;
+			res.send(base.first + notFound.pageContent + base.second);
 		}
 	} catch {
 		res.sendStatus(500);

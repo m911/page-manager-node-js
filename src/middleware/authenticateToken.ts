@@ -10,6 +10,7 @@ export default function authenticateToken(
 	const authHeader = req.headers.authorization;
 	const queryParam = req.query.access_token?.toString();
 	const cookieToken = req.cookies?.get("access_token");
+	console.log(cookieToken);
 	const token =
 		(authHeader && authHeader.split(" ")[1]) || queryParam || cookieToken;
 	console.log(cookieToken);

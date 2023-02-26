@@ -1,14 +1,11 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { pagesDb } from "../db/db";
 import { passwordHasher } from "../auth/passwordHasher";
 import authenticateToken from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { body, validationResult } from "express-validator";
-import { CONFIG } from "../config/CONFIG";
 const cPanelRouter = Router();
 import { checkValidLogin } from "../middleware/checkValidLogin";
-import { cachedDataVersionTag } from "v8";
 
 cPanelRouter.post(
 	"/login",
@@ -24,16 +21,16 @@ cPanelRouter.post(
 				authorizationType: "Bearer ",
 				auth_token: token,
 			};
+			res.cookie("access_token", token, {
+				expires: new Date(Date.now() + 1200),
+			});
 			res.send(response);
-			// res.setHeader("authorization", token);
-			// res.redirect(req.baseUrl);
-			// .redirect(req.baseUrl);
-			// res.redirect(`/oauth`);
 		}
 	}
 );
 
 cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
+	// console.log(first)
 	res.json({ text: "this is protected text" });
 });
 

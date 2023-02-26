@@ -29,8 +29,15 @@ class CustomRequest {
 		DELETE: "DELETE",
 	};
 	headers = {
-		"Content-Type": "application/json",
-		authorization: "Bearer " + auth_token,
+		appJson: {
+			"Content-Type": "application/json",
+		},
+		textHtml: {
+			"Content-Type": "text/html",
+		},
+		jwt: {
+			authorization: "Bearer " + auth_token,
+		},
 	};
 }
 const request = new CustomRequest();
@@ -55,16 +62,14 @@ function fieldUpdate(event) {
 async function getAuthToken() {
 	try {
 		const response = await fetch(api.BASE_URL + ENDPOINTS.adminPanelLogin, {
-			headers: {
-				"Content-Type": "application/json",
-			},
+			headers: request.headers.appJson,
 			method: request.methods.POST,
 			body: jsonStringifier(formFields),
 		}).then((response) => {
 			return response.json();
 		});
 		auth_token = response.auth_token;
-		console.log(auth_token);
+		localStorage.setItem("auth_token", "test");
 	} catch (err) {
 		console.log(err.message);
 	}
@@ -72,18 +77,16 @@ async function getAuthToken() {
 
 async function handleLogin(event) {
 	event.preventDefault();
-	if (auth_token.length == 0) getAuthToken();
-	else {
-		try {
-			const response2 = await fetch(
-				`${api.BASE_URL}/${api.ENDPOINTS.adminPanel}`,
-				{ headers: api.request.headers.authorization }
-			).then((response) => response.json());
-			console.log(response2);
-		} catch (error) {
-			console.log(error.message);
-			throw new Error("Failed to fetch data");
-		}
+	try {
+		if (auth_token.length == 0) getAuthToken();
+		const response2 = await fetch(api.BASE_URL + ENDPOINTS.adminPanel, {
+			headers: request.headers.appJson,
+			...request.headers.jwt,
+		}).then((response) => response.json());
+		console.log(response2);
+	} catch (error) {
+		console.log(error.message);
+		throw new Error("Failed to fetch data");
 	}
 }
 
