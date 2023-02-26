@@ -12,17 +12,14 @@ import { cachedDataVersionTag } from "v8";
 
 cPanelRouter.post(
 	"/login",
-	async (req: Request, res: Response, next: NextFunction) => {
+	checkValidLogin,
+	(req: Request, res: Response, next: NextFunction) => {
 		const reqBody: ILoginCredentials = req.body;
-		console.log(reqBody.username);
 		if (reqBody == null && !reqBody && reqBody) {
 			res.send(401);
 		} else {
-			console.log(reqBody);
-			checkValidLogin(reqBody, res, next);
 			passwordHasher(reqBody, res);
 			const token = generateToken(reqBody);
-			res.cookie("access_token", token);
 			const response = {
 				authorizationType: "Bearer ",
 				auth_token: token,

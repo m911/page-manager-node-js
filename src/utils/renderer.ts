@@ -21,7 +21,11 @@ export default function renderer(
 				page.parts?.first + options.pageContent + page.parts?.second
 			);
 			const file = readFileSync(path);
-			res.write(file);
+			// res.write(file);
+			res.write(
+				path,
+				page.parts?.first + options.pageContent + page.parts?.second
+			);
 			res.end();
 		} else {
 			res.render(

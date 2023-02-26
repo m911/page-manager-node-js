@@ -4,7 +4,6 @@ import renderer from "../utils/renderer";
 const loginRouter = Router();
 import { readFileSync } from "fs";
 import { CONFIG } from "../config/CONFIG";
-CONFIG;
 
 // loginRouter.get("/", (req: Request, res: Response) => {
 // 	const pageContent: string = mockDb[1].pageContent;
