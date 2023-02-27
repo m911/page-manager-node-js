@@ -1,10 +1,11 @@
 export default interface IPage {
 	id: number;
 	title: string;
-	metaData: string;
+	style?: string;
+	metaDescription: string;
 	pageContent: string;
 	parts?: {
-		first: string;
+		head: string;
 		second: string;
 	};
 	url: string;

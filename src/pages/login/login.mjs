@@ -29,15 +29,9 @@ class CustomRequest {
 		DELETE: "DELETE",
 	};
 	headers = {
-		appJson: {
-			"Content-Type": "application/json",
-		},
-		textHtml: {
-			"Content-Type": "text/html",
-		},
-		jwt: {
-			authorization: "Bearer " + auth_token,
-		},
+		appJson: "Content-Type: application/json",
+		textHtml: "Content-Type: text/html",
+		jwt: `authorization: "Bearer " + ${auth_token}`,
 	};
 }
 const request = new CustomRequest();
@@ -57,6 +51,7 @@ const formFields = new Login();
 function fieldUpdate(event) {
 	const ev = event.target;
 	formFields[ev.name] = ev.value;
+	console.log(formFields);
 }
 
 async function getAuthToken() {
@@ -70,6 +65,7 @@ async function getAuthToken() {
 		});
 		auth_token = response.auth_token;
 		localStorage.setItem("auth_token", "test");
+		return auth_token;
 	} catch (err) {
 		console.log(err.message);
 	}
@@ -78,11 +74,17 @@ async function getAuthToken() {
 async function handleLogin(event) {
 	event.preventDefault();
 	try {
-		if (auth_token.length == 0) getAuthToken();
+		// if (auth_token.length == 0) {
+		// 	const auth_token = getAuthToken();
+		// }
+		// console.log(auth_token);
 		const response2 = await fetch(api.BASE_URL + ENDPOINTS.adminPanel, {
-			headers: request.headers.appJson,
-			...request.headers.jwt,
+			headers: {
+				authorization: "Bearer " + auth_token,
+				"content-type": "application/json",
+			},
 		}).then((response) => response.json());
+		console.log(auth_token);
 		console.log(response2);
 	} catch (error) {
 		console.log(error.message);

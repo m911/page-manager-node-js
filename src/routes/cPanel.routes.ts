@@ -29,13 +29,18 @@ cPanelRouter.post(
 	}
 );
 
-cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
-	// console.log(first)
-	res.json({ text: "this is protected text" });
-});
+cPanelRouter.get(
+	"/",
+	// authenticateToken,
+	(req: Request, res: Response) => {
+		// console.log(first)
+		// cPanelRouter.move("/panel", cPanelRouter);
+		res.json({ text: "this is protected text" });
+	}
+);
 
 cPanelRouter.get("/login", (req: Request, res: Response) => {
-	res.sendStatus(404);
+	res.redirect("/404");
 });
 
 cPanelRouter.get("/oauth", (req: Request, res: Response) => {

@@ -4,10 +4,11 @@ import IPage from "../models/IPage";
 export const pagesDb: IPage[] = [
 	{
 		id: 0,
-		metaData: "Navbar",
+		metaDescription: "Navbar",
 		pageContent: "",
-		parts: {
-			first: `<!DOCTYPE html>
+        parts: {
+         
+			head: `<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -74,14 +75,14 @@ export const pagesDb: IPage[] = [
 	{
 		id: 1,
 		title: "Home",
-		metaData: `homepage`,
+		metaDescription: `homepage`,
 		pageContent: ``,
 		url: "home",
 	},
 	{
 		id: 2,
 		title: "Login",
-		metaData: `loginPage`,
+		metaDescription: `loginPage`,
 		pageContent: `<form>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">User name</label>
@@ -98,29 +99,15 @@ export const pagesDb: IPage[] = [
 	},
 	{
 		id: 3,
-		metaData: "Sucessfully logged in",
+		metaDescription: "Sucessfully logged in",
 		pageContent: `<h1>Login Succesfullly</h1>`,
 		title: "Sucessfully logged in",
 		url: "loginSuccess",
 	},
 	{
 		id: 4,
-		metaData: "404 page",
-		pageContent: `<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bootstrap 5 404 Error Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-
-<body>
-    <div class="d-flex align-items-center justify-content-center vh-100">
+		metaDescription: "404 page",
+		pageContent: `<div class="d-flex align-items-center justify-content-center vh-100">
         <div class="text-center">
             <h1 class="display-1 fw-bold">404</h1>
             <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
@@ -129,13 +116,25 @@ export const pagesDb: IPage[] = [
             </p>
             <a href="/" class="btn btn-primary">Go Home</a>
         </div>
-    </div>
-</body>
-
-
-</html>`,
+    </div>`,
 		title: "404",
 		url: "404",
+	},
+	{
+		id: 5,
+		metaDescription: "500 page",
+		pageContent: `<div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">404</h1>
+            <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
+            <p class="lead">
+                The page you’re looking for doesn’t exist.
+            </p>
+            <a href="/" class="btn btn-primary">Go Home</a>
+        </div>
+    </div>`,
+		title: "500",
+		url: "500",
 	},
 ];
 

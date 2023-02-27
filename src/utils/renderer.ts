@@ -23,12 +23,12 @@ export default function renderer(
 			: -1;
 
 		if (page != 1) {
-			res.send(base?.first + pagesDb[page].pageContent + base?.second);
+			res.send(base?.head + pagesDb[page].pageContent + base?.second);
 		} else if (options?.pageContent) {
-			res.send(base.first + options.pageContent + base.second);
+			res.send(base.head + options.pageContent + base.second);
 		} else {
 			const notFound = pagesDb.find((p) => p.url === "404")!;
-			res.send(base.first + notFound.pageContent + base.second);
+			res.send(base.head + notFound.pageContent + base.second);
 		}
 	} catch {
 		res.sendStatus(500);
