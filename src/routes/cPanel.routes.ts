@@ -4,8 +4,12 @@ import authenticateToken from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { body, validationResult } from "express-validator";
-const cPanelRouter = Router();
 import { checkValidLogin } from "../middleware/checkValidLogin";
+import fetch from "../db/query";
+
+import IPage from "../models/IPage";
+
+const cPanelRouter = Router();
 
 cPanelRouter.post(
 	"/login",
@@ -33,20 +37,16 @@ cPanelRouter.get(
 	"/",
 	// authenticateToken,
 	(req: Request, res: Response) => {
-		// console.log(first)
-		// cPanelRouter.move("/panel", cPanelRouter);
-		res.json({ text: "this is protected text" });
+		fetch.getAll(res, (rows) => {
+			return res.send({ data: rows });
+		});
+		// console.log(rows);
+		// return cPanelRouter.move("/panel", cPanelRouter);
 	}
 );
 
 cPanelRouter.get("/login", (req: Request, res: Response) => {
-	res.redirect("/404");
-});
-
-cPanelRouter.get("/oauth", (req: Request, res: Response) => {
-	// res.header("Content-Type", "application/json");
-	// res.header("authorization", "Bearer " + req.query.access_token);
-	res.redirect(302, `/cPanel`);
+	return res.redirect("/404");
 });
 
 export default cPanelRouter;

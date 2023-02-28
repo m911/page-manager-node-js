@@ -1,14 +1,14 @@
 export default interface IPage {
 	id: number;
-	title: string;
-	style?: string;
+	url: string;
 	metaDescription: string;
+	title: string;
+	// style?: string;
 	pageContent: string;
 	parts?: {
-		head: string;
-		second: string;
+		header: string;
+		footer: string;
 	};
-	url: string;
 }
 
 // export default interface IPage {

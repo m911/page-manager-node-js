@@ -4,10 +4,12 @@ import IPage from "../models/IPage";
 export const pagesDb: IPage[] = [
 	{
 		id: 0,
+		url: `/`,
 		metaDescription: "Navbar",
+		title: `Welcome`,
 		pageContent: "",
 		parts: {
-			head: `<!DOCTYPE html>
+			header: `<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -59,7 +61,7 @@ export const pagesDb: IPage[] = [
         </div>
     </nav>
     <main id="pageContent" class="container">`,
-			second: `
+			footer: `
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
@@ -68,8 +70,6 @@ export const pagesDb: IPage[] = [
 
 </html>`,
 		},
-		title: `Welcome`,
-		url: `/`,
 	},
 	{
 		id: 1,
@@ -104,40 +104,8 @@ export const pagesDb: IPage[] = [
 		id: 3,
 		metaDescription: "Sucessfully logged in",
 		pageContent: `<h1>Login Succesfullly</h1>`,
-		title: "Sucessfully logged in",
+		title: "<h1>Sucessfully logged in<h1>",
 		url: "loginSuccess",
-	},
-	{
-		id: 4,
-		metaDescription: "404 page",
-		pageContent: `<div class="d-flex align-items-center justify-content-center vh-100">
-        <div class="text-center">
-            <h1 class="display-1 fw-bold">404</h1>
-            <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
-            <p class="lead">
-                The page you’re looking for doesn’t exist.
-            </p>
-            <a href="/" class="btn btn-primary">Go Home</a>
-        </div>
-    </div>`,
-		title: "404",
-		url: "404",
-	},
-	{
-		id: 5,
-		metaDescription: "500 page",
-		pageContent: `<div class="d-flex align-items-center justify-content-center vh-100">
-        <div class="text-center">
-            <h1 class="display-1 fw-bold">404</h1>
-            <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
-            <p class="lead">
-                The page you’re looking for doesn’t exist.
-            </p>
-            <a href="/" class="btn btn-primary">Go Home</a>
-        </div>
-    </div>`,
-		title: "500",
-		url: "500",
 	},
 ];
 
