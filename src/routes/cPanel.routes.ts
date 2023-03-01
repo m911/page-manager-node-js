@@ -38,7 +38,9 @@ cPanelRouter.get(
 	// authenticateToken,
 	(req: Request, res: Response) => {
 		fetch.getAll(res, (rows) => {
-			return res.send({ data: rows });
+			// return res.send({ data: rows });
+			console.table(rows);
+			res.render("cPanel", { pages: rows });
 		});
 		// console.log(rows);
 		// return cPanelRouter.move("/panel", cPanelRouter);

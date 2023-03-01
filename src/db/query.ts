@@ -2,23 +2,30 @@ import mysql from "mysql";
 import { NextFunction, Request, Response } from "express";
 import IPage from "../models/IPage";
 import { pagesDb } from "./db";
+import { send } from "process";
 
-//Coonnect to the database
+// DBCoonnection settings to the database
 const pool = mysql.createPool({
-	host: "127.0.0.1",
-	user: "test",
-	password: "someStrongPassword",
-	database: "NodeDb",
+	host: "localhost",
+	user: "test2",
+	password: "test2",
+	database: "test2",
 	connectionLimit: 10,
 	multipleStatements: true,
 });
+
 function getAll(res: Response, next: NextFunction): any {
-	// Uncomment to line 33
+	// Uncomment to line 34
 	// pool.getConnection(function (err: any, connection: any) {
 	// 	if (err) {
 	// 		console.log(err);
-	// 		return res.sendStatus(500);
+	// 		return res.send({
+	// 			success: false,
+	// 			message: "Connection to db failed",
+	// 		});
 	// 	}
+	// 	console.clear();
+	// 	console.log("connection established");
 
 	// 	//If connection is successfully established
 	// 	pool.query(`SELECT * FROM PagesData`, (err: any, rows: IPage) => {
@@ -26,13 +33,14 @@ function getAll(res: Response, next: NextFunction): any {
 	// 			console.error(err);
 	// 			return res.sendStatus(404);
 	// 		}
-	// 		connection.close();
+	// 		connection.release();
 	// 		console.log(rows);
 	// 		return next(rows);
+	// 		// return res.send(rows);
 	// 	});
 	// });
 
-	//Returning mock results for the purpose of
+	//Returning mock results for the purpose of dev
 	return next(pagesDb);
 }
 

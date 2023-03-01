@@ -1,25 +1,71 @@
-<div class="table-responsive">
-    <table class="table table-bordered border-primary table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">URL</th>
-                <th scope="col">Title</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <%= const count=0;
-                
-            %>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
+<!DOCTYPE html>
+<html lang="en">
 
-        </tbody>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://cdn.jsdelivr.net/npm/string-strip-html/dist/string-strip-html.umd.js"></script>
 
-    </table>
-</div>
+    <title>
+        Pages manager
+    </title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="m-4 text-center">
+            <img src="/images/logo.svg" alt="">
+            <p class="text-white">Lifestyle | Fashion | Travel</p>
+
+        </div>
+        <div class="row mb-3">
+            <a href="/addNew" class="btn btn-success d-flex align-items-center"><i
+                    class="material-icons mr-2">add_circle</i>
+                New Page
+            </a>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Title</th>
+                        <th sscope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% const pagesNmber=1 %>
+                        <% pages.forEach(page=>{ %>
+                            <tr>
+                                <th scope="row">
+                                    <%=pagesNmber %>
+                                </th>
+                                <td>
+                                    <%=page.url %>
+                                </td>
+                                <td>
+                                    <%=page.title %>
+                                </td>
+                                <td>
+                                    <%- <span class="material-symbols-outlined"><a href="/delete?= %> <%page.url>"></a>
+                                        delete</span>
+                                </td>
+                                <% }) %>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
