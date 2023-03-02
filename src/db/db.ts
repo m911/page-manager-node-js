@@ -104,8 +104,47 @@ export const pagesDb: IPage[] = [
 		id: 3,
 		metaDescription: "Sucessfully logged in",
 		pageContent: `<h1>Login Succesfullly</h1>`,
-		title: "<h1>Sucessfully logged in<h1>",
+		title: "Login success",
 		url: "loginSuccess",
+	},
+	{
+		id: 4,
+		metaDescription: "Add new page form",
+		pageContent: `
+         
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+ 
+<script>tinymce.init({selector:'textarea'});</script>
+        <div class="mb-3">
+
+<form>
+    <div class="mb-3">
+        <label for="titleInputField" class="form-label">Title</label>
+        <input type="text" class="form-control" id="titleInputField" name="title">
+
+    </div>
+    <div class="mb-3">
+        <label for="metaDescriptionInputField" class="form-label">Meta Description</label>
+        <input type="text" class="form-control" id="metaDescriptionInputField" name="metaDescription">
+
+    </div>
+    <div class="mb-3">
+        <label for="contentInputField" class="form-label">Content</label>
+        <textarea class="form-control" id="contentInputField" rows="3" name="pageContent"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="UrlInputField" class="form-label">URL</label>
+        <input type="text" class="form-control" id="UrlInputField" name="metaDescription">
+    </div>
+    <button type="reset" class="btn btn-primary">
+        Cancel
+    </button>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+`,
+		title: "New page form",
+		url: "newpage",
 	},
 ];
 

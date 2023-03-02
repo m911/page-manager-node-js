@@ -7,6 +7,7 @@ import { body, validationResult } from "express-validator";
 import { checkValidLogin } from "../middleware/checkValidLogin";
 import fetch from "../db/query";
 import { pagesDb } from "../db/db";
+import renderer from "../utils/renderer";
 
 const cPanelRouter = Router();
 
@@ -51,37 +52,33 @@ cPanelRouter.get(
 	}
 );
 
-cPanelRouter.get(["/delete:deleteId"], (req: Request, res: Response) => {
-	const queryParams = req.query;
-	const id = parseInt(req.params.deleteId)!;
-	console.log(id, JSON.stringify(req.params));
-	if (!id && id <= -1) {
-		return res.send({
-			status: 400,
-			message: "Bad request",
-		});
+cPanelRouter.get(
+	"/new",
+	// authenticateToken,
+	(req: Request, res: Response) => {
+		renderer(res, { pageId: 4 });
 	}
-	res.send({ id });
-	// const pageIndex = pagesDb.findIndex((item) => item.id === id);
+);
 
-	// if (pageIndex == -1) {
-	// 	return res.redirect("/404");
-	// }
-	// pagesDb.splice(pageIndex, 1);
-	// const response = { mess: "success", id };
-	// // res.redirect(goTo);
-	// res.send({ id, goTo });
-});
-cPanelRouter.delete(["/delete:id"], (req: Request, res: Response) => {
-	const id = parseInt(req.params.id)!;
-	const goTo = req.params.goTo;
-	console.log(id, goTo, req.params, req.body);
+cPanelRouter.get(["/delete/:deleteId"], (req: Request, res: Response) => {
+	const id = parseInt(req.params.deleteId)!;
+	const goTo = req.query;
+	console.log(id, JSON.stringify(goTo));
 	if (!id && id <= -1) {
 		return res.send({
 			status: 400,
 			message: "Bad request",
 		});
 	}
+	// res.send({ id, queryParams });
+	const pageIndex = pagesDb.findIndex((item) => item.id === id);
+
+	if (pageIndex == -1) {
+		return res.redirect("/404");
+	}
+	pagesDb.splice(pageIndex, 1);
+	// const response = { mess: "success", id };
+	// res.redirect(goTo);
 	res.send({ id, goTo });
 });
 
