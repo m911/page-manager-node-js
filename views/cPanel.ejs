@@ -36,37 +36,37 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Url</th>
                         <th scope="col">Title</th>
                         <th sscope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% const pagesNmber=1 %>
-                        <% pages.forEach(page=>{ %>
-                            <tr>
-                                <th scope="row">
-                                    <%=pagesNmber %>
-                                </th>
-                                <td>
-                                    <%=page.url %>
-                                </td>
-                                <td>
-                                    <%=page.title %>
-                                </td>
-                                <td>
-                                    <span class="material-symbols-outlined">
-                                        <!-- <a href="/delete?=page.id>"></a> -->
-                                        delete</span>
-                                </td>
-                                <% }) %>
-                            </tr>
+                    <% pages.forEach(page=>{ %>
+                        <tr>
+                            <th scope="row">
+                                <%=page.id %>
+                            </th>
+                            <td>
+                                <%=page.url %>
+                            </td>
+                            <td>
+                                <%=page.title %>
+                            </td>
+                            <td>
+                                <a href="delete<%=page.id%>?goTo=/cPanel
+                                        " class="material-symbols-outlined">
+                                    delete</a>
+
+                            </td>
+                            <% }) %>
+                        </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="/js/index.js"></script>
+    <script src="cPanel.js"></script>
 </body>
 
 </html>

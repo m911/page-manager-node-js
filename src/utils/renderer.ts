@@ -1,7 +1,4 @@
 import { Response } from "express";
-import { readFileSync, writeFileSync } from "fs";
-import { CONFIG } from "../config/CONFIG";
-import IRenderer from "../models/IRenderer";
 import { pagesDb } from "../db/db";
 import IPage from "../models/IPage";
 
