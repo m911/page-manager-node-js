@@ -56,7 +56,7 @@ cPanelRouter.get(
 	"/new",
 	// authenticateToken,
 	(req: Request, res: Response) => {
-		renderer(res, { pageId: 4 });
+		renderer(res, { resCode: 4 });
 	}
 );
 

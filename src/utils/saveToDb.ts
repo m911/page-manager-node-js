@@ -1,4 +1,2 @@
-import { pagesDb } from "../db/db"
-const saveToDb = (id: number) => {
-
-}
+import { pagesDb } from "../db/db";
+const saveToDb = (id: number) => {};

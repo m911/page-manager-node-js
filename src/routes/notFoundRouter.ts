@@ -4,7 +4,7 @@ import renderer from "../utils/renderer";
 const notFoundRouter = Router();
 
 notFoundRouter.get("/", (req: Request, res: Response) => {
-	renderer(res, { url: "404" });
+	renderer(res, { resCode: 404 });
 });
 
 export default notFoundRouter;

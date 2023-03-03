@@ -8,7 +8,7 @@ loginSuccessRoute.get(
 	"/",
 	authenticateToken,
 	(req: Request, res: Response, next: NextFunction) => {
-		renderer(res, { pageId: 3 });
+		renderer(res, { resCode: 3 });
 	}
 );
 export default loginSuccessRoute;

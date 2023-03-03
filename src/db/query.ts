@@ -2,14 +2,13 @@ import mysql from "mysql";
 import { NextFunction, Request, Response } from "express";
 import IPage from "../models/IPage";
 import { pagesDb } from "./db";
-import { send } from "process";
+
 
 // DBCoonnection settings to the database
 const pool = mysql.createPool({
 	host: "localhost",
-	user: "test2",
-	password: "test2",
-	database: "test2",
+	user: "test",
+	password: "test",
 	connectionLimit: 10,
 	multipleStatements: true,
 });
@@ -75,3 +74,4 @@ const fetch = {
 	getOne,
 };
 export default fetch;
+
