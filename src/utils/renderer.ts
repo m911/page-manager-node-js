@@ -1,6 +1,6 @@
 import { Response } from "express";
-import { pagesDb } from "../db/db";
 import IPage from "../models/IPage";
+import dbContext from "../db/query2";
 
 // export default function renderer(
 // 	res: Response,
@@ -10,55 +10,26 @@ import IPage from "../models/IPage";
 // 		pageId?: number;
 // 	}
 // ): void {
-// 	res.setHeader("Content-Type", "text/html");
-// 	const base = pagesDb.find((p) => p.url === "/")!.parts!;
-// 	const page: number = options?.pageId
-// 		? options.pageId
-// 		: options?.url
-// 		? pagesDb.findIndex((p) => p.url === options.url)
-// 		: -1;
 
-// 	if (page != 1) {
-// 		// res.send(base?.head + pagesDb[page].pageContent + base?.second);
-// 		res.send(base.header + pagesDb[page].pageContent + base?.footer);
-// 	} else if (options?.pageContent) {
-// 		res.send(base.header + options.pageContent + base.footer);
-// 	} else {
-// 		const notFound = pagesDb.find((p) => p.url === "404")!;
-// 		res.send(base.header + notFound.pageContent + base.footer);
-// 		res.sendStatus(500);
-// 	}
-// }
-
-export default function renderer(
-	res: Response,
-	options: {
-		resCode?: number;
-		url?: string;
-		pageContent?: string | Buffer | Buffer[] | string[];
-	}
-): void {
-	res.setHeader("Content-Type", "text/html");
-	const base: IPage = pagesDb.find((p) => p.url === "/")!;
-	const page: number = options.resCode
-		? options.resCode
-		: options.url
-		? pagesDb.findIndex((p) => p.url === options.url)
-		: -1;
-	const pageOptions = {
-		title: base.title,
-		metaDescription: base.metaDescription,
-		pageContent: options.pageContent ?? base.pageContent,
-	};
-
-	if (page != 1) {
-		res.render("index.ejs", pageOptions);
-	} else {
-		res.render(pagesNumbers[404]);
-	}
-}
-const pagesNumbers = {
-	404: "404.ejs",
-	500: "500.ejs",
+const pagesNames = {
+	notFound404: "404.ejs",
+	internalServerError500: "500.ejs",
+	index: "index.ejs",
 };
 
+export const renderObject = {
+	renderByUrl: function (url: string, res: Response, options: Object) {
+		const base: IPage | undefined = dbContext
+			.getAll()
+			.find((p) => p.url === url);
+		if (!base) res.render(pagesNames.notFound404);
+		res.render(pagesNames.index, base);
+	},
+	renderByCode: function (code: number, res: Response, options: Object) {
+		if (!Object.keys(pagesNames).includes(code.toString()))
+			res.render(pagesNames.notFound404);
+		res.render(pagesNames.index);
+	},
+};
+
+export default renderObject;

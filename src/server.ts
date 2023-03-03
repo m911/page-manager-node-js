@@ -3,6 +3,7 @@ import routes from "./routes";
 import { CONFIG } from "./config/CONFIG";
 CONFIG.dotEnvConfig();
 import cors from "cors";
+import dbContext from "./db/query2";
 
 const app = express();
 const allowedDomains = ["http://localhost:5500", "http://localhost:3000"];
@@ -22,4 +23,7 @@ app.set("view engine", "ejs");
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server is running on port: ${process.env.PORT}`);
+	const context = dbContext;
+	const res = context.getPages();
+	console.log(res);
 });

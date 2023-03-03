@@ -7,13 +7,15 @@ import { body, validationResult } from "express-validator";
 import { checkValidLogin } from "../middleware/checkValidLogin";
 import fetch from "../db/query";
 import { pagesDb } from "../db/db";
-import renderer from "../utils/renderer";
+// import renderer from "../utils/renderer";
 
 const cPanelRouter = Router();
 
 cPanelRouter.get("/", (req: Request, res: Response) => {
-	cPanelRouter.move("/panel", cPanelRouter);
-	return res.redirect("cPanel/pages");
+	// cPanelRouter.move("/panel", cPanelRouter);
+	// return res.redirect("cPanel/pages");
+
+	res.render("cPanel.ejs");
 });
 
 cPanelRouter.post(
@@ -56,7 +58,7 @@ cPanelRouter.get(
 	"/new",
 	// authenticateToken,
 	(req: Request, res: Response) => {
-		renderer(res, { resCode: 4 });
+		// renderer(res, { resCode: 4 });
 	}
 );
 

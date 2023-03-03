@@ -12,21 +12,40 @@ const config = {
 	},
 };
 
-function getAll(res: Response, next: NextFunction): IPage[] {
-	return sql.connect(config, function (err: any) {
-		if (err) console.error(err);
-		const request = new sql.Request();
-		request.query("SELECT * FROM PagesData", function (err: any, result: any) {
-			if (err) console.error(err);
-			return result.recordset;
-		});
-	});
+async function getPages() {
+	const err = await sql.connect(config);
+	if (err) console.error(err);
+
+	const result = await new sql.Request().query("SELECT * FROM PagesData");
+	return result.recordset;
 }
 
-function getOne() {}
+async function getPageByUrl(url: string) {
+	try {
+		await sql.connect(config);
+
+		const result = await new sql.Request().query(
+			`declare @url nvarchar(max) = 'mitko' 'select * from PagesData' 
+			SELECT * FROM PagesData WHERE url=@${url}`
+			// `SELECT * FROM PagesData WHERE url='${url}'`
+		);
+
+		// const result1 = await new sql.Request().query(
+		// declare @url nvarchar(max) = 'mitko SELECT * FROM asdasd'
+		// SELECT * FROM PagesData WHERE url=@url
+		// 	`SELECT * FROM PagesData WHERE url=@p`,
+		// 	{ p123: url }
+		// );
+
+		return result.recordset.length > 0 ? result.recordset[0] : null;
+	} catch (error) {
+		console.error(error);
+		throw new Error("");
+	}
+}
 
 const dbContext = {
-	getAll,
-	getOne,
+	getPages,
+	getPageByUrl,
 };
 export default dbContext;
