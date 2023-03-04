@@ -12,15 +12,15 @@ const config = {
 	},
 };
 
-async function getPages() {
+async function getPages(): Promise<IPage[]> {
 	const err = await sql.connect(config);
-	if (err) console.error(err);
+	if (err) console.error("getPages " + err);
 
 	const result = await new sql.Request().query("SELECT * FROM PagesData");
 	return result.recordset;
 }
 
-async function getPageByUrl(url: string) {
+async function getPageByUrl(url: string): Promise<IPage> {
 	try {
 		await sql.connect(config);
 
@@ -38,9 +38,9 @@ async function getPageByUrl(url: string) {
 		// );
 
 		return result.recordset.length > 0 ? result.recordset[0] : null;
-	} catch (error) {
-		console.error(error);
-		throw new Error("");
+	} catch (error: any) {
+		console.error("getPageByUrl " + error);
+		throw new Error(`Error getting page from url: ${url} error.message`);
 	}
 }
 

@@ -3,10 +3,7 @@ export default interface IPage {
 	url: string;
 	metaDescription: string;
 	title: string;
-	// style?: string;
+	header?: string;
 	pageContent: string;
-	parts?: {
-		header: string;
-		footer: string;
-	};
+	footer?: string;
 }

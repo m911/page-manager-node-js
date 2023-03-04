@@ -3,7 +3,7 @@ import loginRouter from "./login.routes";
 import homeRouter from "./home.routes";
 import cPanelRouter from "./cPanel.routes";
 import loginSuccessRouter from "./loginSuccess.routes";
-import notFoundRouter from "./notFoundRouter";
+import notFoundRouter from "./notFound.routes";
 
 const routes = Router();
 

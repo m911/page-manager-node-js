@@ -1,2 +1,2 @@
-import { pagesDb } from "../db/db";
+import dbContext from "../db/query2";
 const saveToDb = (id: number) => {};

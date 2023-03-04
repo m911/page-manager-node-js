@@ -9,18 +9,30 @@ const config = {
 	},
 };
 
-function getAll(res, next) {
-	sql.connect(config, function (err) {
-		if (err) console.error(err);
-		const request = new sql.Request();
-		request.query(
-			"SELECT * FROM PagesData",
-			function (err, result) {
-				if (err) console.error(err);
-				else console.log(result.recordset);
-			}
+
+async function getAll() {
+	const url = "mitko";
+	try {
+		await sql.connect(config);
+
+		const result = await new sql.Request().query(
+			`declare @url nvarchar(max) = '${url.trim()}';
+			SELECT * FROM PagesData WHERE url=@url;`
+			// `SELECT * FROM PagesData WHERE url='${url}'`
 		);
-	});
+
+		// const result1 = await new sql.Request().query(
+		// declare @url nvarchar(max) = 'mitko SELECT * FROM asdasd'
+		// SELECT * FROM PagesData WHERE url=@url
+		// 	`SELECT * FROM PagesData WHERE url=@p`,
+		// 	{ p123: url }
+		// );
+
+		return result.recordset.length > 0 ? result.recordset[0] : null;
+	} catch (error) {
+		console.error("getPageByUrl " + error);
+		throw new Error("");
+	}
 }
 
 function getOne() {}

@@ -20,7 +20,7 @@ export default function authenticateToken(
 	}
 	jwt.verify(token, process.env.TOKEN_SECRET!, (err: any, data: any) => {
 		if (err) {
-			return res.sendStatus(403);
+			return res.sendStatus(401);
 		} else {
 			// req.token = token;
 			// res.json(data);
