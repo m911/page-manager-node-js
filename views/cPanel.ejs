@@ -47,78 +47,9 @@
             </table>
         </div>
     </div>
-    <script src="cPanel.js"></script>
-    <script src="utils.js"></script>
-    <script>
-        const panel = ((utils) => {
-            const tbody = document.getElementById('table-pages');
-
-            return { init }
-
-            function init() {
-                bindPages();
-                attachEventListeners();
-            }
-
-            async function bindPages() {
-                const pages = await getPages()
-                const rowHtml = pages
-                    .map(forgePageRowHtml)
-                    .join('');
-
-                tbody.innerHTML = rowHtml;
-            }
-
-            function attachEventListeners() {
-                tbody.addEventListener('click', (e) => {
-                    const isDeleteBtn = e.target.classList.contains('btn-delete')
-                    if (!isDeleteBtn) return;
-
-                })
-
-                addEventListener(tbody, 'click', 'btn-delete', target => {
-                    const pageId = target.getAttribute('page-id')
-                    deletePage(pageId)
-                })
-            }
-
-            function deletePage(pageId) {
-                console.log(pageId);
-            }
-
-            //TODO: move to service
-            function getPages() {
-                const pages = [{ id: 1, title: 'title 1' }]
-                return new Promise((resolve, reject) => resolve(pages))
-            }
-
-            function forgePageRowHtml(page) {
-                return `<tr>
-                    <td>${page.id}</td>
-                    <td>${page.url}</td>
-                    <td>${page.title}</td>
-                    <td>
-                        <button type="button" class="btn-delete" page-id="${page.id}">DELETE</button>
-                    </td>
-                </tr>`
-            }
-
-        })(utils);
-
-        panel.init()
-
-
-        //TODO: move to global/utils file 
-        function addEventListener(element, event, selector, callback) {
-            element.addEventListener(event, (e) => {
-                const hasClass = e.target.classList.contains(cssClass)
-                if (!hasClass) return;
-
-                callback(e.target)
-            })
-        }
-
-    </script>
+    <script type="module" src="/utils/utils.js"></script>
+    <script type="module" src="/services/pages.service.js"></script>
+    <script type="module" src="/cPanel/cPanel.js"></script>
 </body>
 
 </html>

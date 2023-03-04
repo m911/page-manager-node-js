@@ -24,11 +24,9 @@ async function getPageByUrl(url: string): Promise<IPage> {
 	try {
 		await sql.connect(config);
 
-		const result = await new sql.Request().query(
-			`declare @url nvarchar(max) = 'mitko' 'select * from PagesData' 
-			SELECT * FROM PagesData WHERE url=@${url}`
-			// `SELECT * FROM PagesData WHERE url='${url}'`
-		);
+		const result = await new sql.Request()
+			.input("name", url)
+			.query("SELECT * FROM PagesData WHERE url=@name");
 
 		// const result1 = await new sql.Request().query(
 		// declare @url nvarchar(max) = 'mitko SELECT * FROM asdasd'

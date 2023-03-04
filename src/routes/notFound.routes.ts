@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction, Router } from "express";
-import renderer from "../utils/renderer";
+import { renderNotFound } from "../utils/renderer";
 const notFoundRouter = Router();
 
 notFoundRouter.get("/", (req: Request, res: Response) => {
-	renderer.renderByCode(404, res);
+	renderNotFound(res);
 });
 
 export default notFoundRouter;
