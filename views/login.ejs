@@ -1,15 +1,18 @@
-<form action="/cPanel" method="post" id="form">
-    <div class="mb-3">
-        <label for="username" class="form-label">User name</label>
-        <input type="text" class="form-control" id="userNameField" name="username" aria-describedby="textHelp"
-            minlength="3" pattern="[\w\d]{3,}" placeholder="Min. length 3. Letters and numbers only" required>
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="passwordField" name="password" pattern="[\w\d!@#$%^&*_&.-]{4,}"
-            minlength="4" placeholder="Min. length 4. Letters, numbers and special chars only" required>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container">
+    <form class="p-4 " action="/cPanel" method="post" id="form">
+        <div class="mb-3">
+            <label for="username" class="form-label">User name</label>
+            <input type="text" class="form-control" id="userNameField" name="username" aria-describedby="textHelp"
+                minlength="3" pattern="[\w\d]{3,}" placeholder="Min. length 3. Letters and numbers only" required>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordField" name="password"
+                pattern="[\w\d!@#$%^&*_&.-]{4,}" minlength="4"
+                placeholder="Min. length 4. Letters, numbers and special chars only" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

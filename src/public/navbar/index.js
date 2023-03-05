@@ -17,6 +17,6 @@ async function bindPages() {
 
 function forgePageRowHtml(page) {
 	return `<li class="nav-item">
-               <a href="${page.url}" class="nav-link">${page.title}</a>
+               <a href="/pages/${page.url}" class="nav-link">${page.title}</a>
             </li>`;
 }
