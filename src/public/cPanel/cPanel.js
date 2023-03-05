@@ -1,6 +1,5 @@
 import { utils } from "../utils/utils.js";
 import { pageService } from "../services/pages.service.js";
-// const utils = require("../utils/utils");
 
 const tbody = document.getElementById("table-pages");
 init();
@@ -12,7 +11,6 @@ function init() {
 
 async function bindPages() {
 	const pages = await pageService.getPages();
-	//Todo: Check join
 	const rowHtml = pages.map(forgePageRowHtml).join("");
 
 	tbody.innerHTML = rowHtml;
@@ -25,7 +23,7 @@ function attachEventListeners() {
 	});
 }
 
-//Todo Confirmation
+//TODO: Confirmation
 function deletePage(pageId) {
 	console.log(pageId);
 }
