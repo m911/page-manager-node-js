@@ -1,10 +1,11 @@
 import { Router, Request, Response } from "express";
 
 const loginRouter = Router();
-import ejs from "ejs";
+import { renderEjsFileNames } from "../utils/renderer";
 
 loginRouter.get("/", (req: Request, res: Response) => {
-	res.render("login.ejs");
+	const ejses = ["login.ejs"];
+	renderEjsFileNames(ejses, res);
 });
 
 export default loginRouter;

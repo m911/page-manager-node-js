@@ -21,11 +21,22 @@ async function renderByUrl(url: string, res: Response, options?: Object) {
 function renderNotFound(res: Response) {
 	return res.render(pagesNames.notFound404);
 }
+
 function renderServerError(res: Response) {
 	return res.render(pagesNames.internalServerError500);
 }
+
 function renderNotauthorized(res: Response) {
 	return res.render(pagesNames.notAuthorized);
 }
+function renderEjsFileNames(fileNames: string[], res: Response) {
+	return res.render(pagesNames.index, { fileNames });
+}
 
-export { renderByUrl, renderNotFound, renderServerError, renderNotauthorized };
+export {
+	renderByUrl,
+	renderNotFound,
+	renderServerError,
+	renderNotauthorized,
+	renderEjsFileNames,
+};
