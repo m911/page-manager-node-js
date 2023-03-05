@@ -5,7 +5,7 @@ import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { checkValidLogin } from "../middleware/checkValidLogin";
 import dbContext from "../db/query2";
-import { renderNotFound } from "../utils/renderer";
+import { renderNotFound, renderEjsFileNames } from "../utils/renderer";
 
 const cPanelRouter = Router();
 
@@ -41,7 +41,8 @@ cPanelRouter.post(
 );
 
 cPanelRouter.get("/new", (req: Request, res: Response) => {
-	// renderer(res, { resCode: 4 });
+	const page = ["newPage.ejs"];
+	renderEjsFileNames(page, res);
 });
 
 cPanelRouter.delete("/:pageId", async (req: Request, res: Response) => {

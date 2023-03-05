@@ -19,7 +19,6 @@ homeRouter.get("/", (req: Request, res: Response) => {
 	                </h3>
 	            </h1>`,
 	});
-	// renderByUrl("mitko", res);
 });
 
 export default homeRouter;

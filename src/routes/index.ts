@@ -18,5 +18,6 @@ routes.use("/api/pages", apiPagesRouter);
 routes.use("/loginSuccess", loginSuccessRouter);
 routes.use("/", homeRouter);
 routes.use("/404", notFoundRouter);
+routes.use("/401", notFoundRouter);
 
 export default routes;

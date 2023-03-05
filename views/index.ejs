@@ -4,9 +4,4 @@
 
         <%- include('layout/pageBody') %>
 
-            <% if (locals.fileNames) { %>
-                <% fileNames.forEach(function(file){ %>
-                    <%- include(file); %>
-                        <% }); %>
-                            <% } %>
-                                <%- include('layout/footer') %>
+            <%- include('layout/footer') %>
