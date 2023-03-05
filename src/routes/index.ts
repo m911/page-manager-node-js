@@ -9,6 +9,7 @@ import notFoundRouter from "./notFound.routes";
 
 const routes = Router();
 
+//TODO: [PM-2] redirect to 404 if not found
 // routes.get("*", homeRouter);
 routes.use("/login", loginRouter);
 routes.use("/cPanel", cPanelRouter);

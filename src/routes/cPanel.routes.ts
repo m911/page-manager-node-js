@@ -5,16 +5,19 @@ import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { checkValidLogin } from "../middleware/checkValidLogin";
 import dbContext from "../db/query2";
+import { renderNotFound } from "../utils/renderer";
 
 const cPanelRouter = Router();
 
-cPanelRouter.get("/", (req: Request, res: Response) => {
-	// cPanelRouter.move("/panel", cPanelRouter);
-	// return res.redirect("cPanel/pages");
+cPanelRouter.get(
+	"/",
+	// authenticateToken,
+	(req: Request, res: Response) => {
+		res.render("cPanel.ejs");
+	}
+);
 
-	res.render("cPanel.ejs");
-});
-
+//TODO: [PM-1] Move to login route
 cPanelRouter.post(
 	"/login",
 	checkValidLogin,
@@ -37,43 +40,14 @@ cPanelRouter.post(
 	}
 );
 
-cPanelRouter.get(
-	"/pages",
-	// authenticateToken,
-	(req: Request, res: Response) => {
-		const pages = dbContext.getPages();
-		
-	}
-);
+cPanelRouter.get("/new", (req: Request, res: Response) => {
+	// renderer(res, { resCode: 4 });
+});
 
-cPanelRouter.get(
-	"/new",
-	// authenticateToken,
-	(req: Request, res: Response) => {
-		// renderer(res, { resCode: 4 });
-	}
-);
-
-// cPanelRouter.get(["/delete/:deleteId"], (req: Request, res: Response) => {
-// 	const id = parseInt(req.params.deleteId)!;
-// 	const goTo = req.query;
-// 	console.log(id, JSON.stringify(goTo));
-// 	if (!id && id <= -1) {
-// 		return res.send({
-// 			status: 400,
-// 			message: "Bad request",
-// 		});
-// 	}
-// 	// res.send({ id, queryParams });
-// 	const pageIndex = pagesDb.findIndex((item) => item.id === id);
-
-// 	if (pageIndex == -1) {
-// 		return renderer.renderByCode(404, res);
-// 	}
-// 	pagesDb.splice(pageIndex, 1);
-// 	// const response = { mess: "success", id };
-// 	// res.redirect(goTo);
-// 	res.send({ id, goTo });
-// });
+cPanelRouter.delete("/:pageId", async (req: Request, res: Response) => {
+	const id = parseInt(req.params.pageId)!;
+	const countDeleted = await dbContext.deletePage(id);
+	res.json({ pagesDeleted: countDeleted });
+});
 
 export default cPanelRouter;

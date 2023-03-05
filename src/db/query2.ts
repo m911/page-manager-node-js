@@ -1,5 +1,3 @@
-import mysql from "mysql";
-import { NextFunction, Request, Response } from "express";
 import IPage from "../models/IPage";
 const sql = require("mssql/msnodesqlv8");
 
@@ -28,13 +26,6 @@ async function getPageByUrl(url: string): Promise<IPage> {
 			.input("name", url)
 			.query("SELECT * FROM PagesData WHERE url=@name");
 
-		// const result1 = await new sql.Request().query(
-		// declare @url nvarchar(max) = 'mitko SELECT * FROM asdasd'
-		// SELECT * FROM PagesData WHERE url=@url
-		// 	`SELECT * FROM PagesData WHERE url=@p`,
-		// 	{ p123: url }
-		// );
-
 		return result.recordset.length > 0 ? result.recordset[0] : null;
 	} catch (error: any) {
 		console.error("getPageByUrl " + error);
@@ -42,8 +33,26 @@ async function getPageByUrl(url: string): Promise<IPage> {
 	}
 }
 
+async function deletePage(id: number): Promise<number> {
+	try {
+		await sql.connect(config);
+
+		const result = await new sql.Request()
+			.input("id", id)
+			.query(
+				"DELETE FROM PagesData WHERE id=@id SELECT * FROM PagesData WHERE id=@id"
+			);
+		return result.rowsAffected[0];
+	} catch (error: any) {
+		throw new Error(
+			`Error while deleting page with id: ${id}. The response is ${error.message}. Invoker is deletePage()`
+		);
+	}
+}
+
 const dbContext = {
 	getPages,
 	getPageByUrl,
+	deletePage,
 };
 export default dbContext;

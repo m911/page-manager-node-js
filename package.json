@@ -27,7 +27,6 @@
 		"jsonwebtoken": "^9.0.0",
 		"msnodesqlv8": "^3.0.1",
 		"mssql": "^9.1.1",
-		"mysql": "^2.18.1",
 		"nodemon": "^2.0.21",
 		"prettier": "^2.8.4",
 		"string-strip-html": "^13.2.0"

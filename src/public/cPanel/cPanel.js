@@ -24,8 +24,14 @@ function attachEventListeners() {
 }
 
 //TODO: Confirmation
-function deletePage(pageId) {
-	console.log(pageId);
+async function deletePage(pageId) {
+	const pagesDelete = await pageService.deletePage(pageId);
+	if (pagesDelete.pagesDeleted > 0) {
+		//TODO: [PM-3] Confirmation
+	} else {
+		//Something else
+	}
+	bindPages();
 }
 
 function forgePageRowHtml(page) {
