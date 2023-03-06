@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import ILoginCredentials from "../models/ILoginCredentials";
+import { Response } from "express";
 
 dotenv.config();
 
-const generateToken = (userCredentials: ILoginCredentials, res?: Response) => {
+const generateToken = (userCredentials: ILoginCredentials) => {
 	const token = jwt.sign(
 		{ data: userCredentials.username },
 		process.env.TOKEN_SECRET!,
@@ -17,8 +18,7 @@ const generateToken = (userCredentials: ILoginCredentials, res?: Response) => {
 		expires_in: process.env.EXPIRESIN,
 		token_type: "Bearer",
 	};
-	// return token;
-	res?.json().;
+	return response;
 };
 
 export default generateToken;

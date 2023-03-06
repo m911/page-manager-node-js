@@ -21,7 +21,7 @@ loginRouter.post(
 			res.send(401);
 		} else {
 			passwordHasher(reqBody, res);
-			const token = generateToken(reqBody, res);
+			const token = generateToken(reqBody);
 			const response = {
 				authorizationType: "Bearer ",
 				auth_token: token,
