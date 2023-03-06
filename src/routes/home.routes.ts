@@ -1,6 +1,6 @@
 import { Router, Request, Response, response, NextFunction } from "express";
 const homeRouter = Router();
-import dbContext from "../db/query2";
+import dbContext from "../db/dbContext";
 import {
 	renderByUrl,
 	renderNotFound,

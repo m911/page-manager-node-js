@@ -22,18 +22,11 @@ loginRouter.post(
 		} else {
 			passwordHasher(reqBody, res);
 			const token = generateToken(reqBody);
-			const response = {
-				authorizationType: "Bearer ",
-				auth_token: token,
-			};
-			res.setHeader(
-				"Authorzation",
-				response.authorizationType + response.auth_token
-			);
-			// res.cookie("access_token", token, {
-			// 	expires: new Date(Date.now() + 1200),
-			// });
-			return res.redirect("/cPanel");
+
+			res.cookie("access_token", token, {
+				expires: new Date(Date.now() + token.expires_in),
+			});
+			res.redirect("/cPanel");
 		}
 	}
 );

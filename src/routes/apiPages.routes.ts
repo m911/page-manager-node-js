@@ -4,14 +4,14 @@ import authenticateToken from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { checkValidLogin } from "../middleware/checkValidLogin";
-import dbContext from "../db/query2";
+import dbContext from "../db/dbContext";
 
 const apiPagesRouter = Router();
 
 apiPagesRouter.get("/", async (req: Request, res: Response) => {
 	// cPanelRouter.move("/panel", cPanelRouter);
 	// return res.redirect("cPanel/pages");
-	const pages = await dbContext.getPages();
+	const pages = await dbContext.getAll(dbContext.tables.pagesData);
 	res.json(pages);
 });
 

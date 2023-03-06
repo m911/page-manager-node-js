@@ -1,6 +1,6 @@
 import { Response } from "express";
 import IPage from "../models/IPage";
-import dbContext from "../db/query2";
+import dbContext from "../db/dbContext";
 import IRenderByCode from "../models/IrenderByCode";
 
 const pagesNames: IRenderByCode = {

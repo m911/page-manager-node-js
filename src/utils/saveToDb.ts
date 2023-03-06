@@ -1,2 +1,2 @@
-import dbContext from "../db/query2";
+import dbContext from "../db/dbContext";
 const saveToDb = (id: number) => {};

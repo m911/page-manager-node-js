@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import ILoginCredentials from "../models/ILoginCredentials";
-import { Response } from "express";
+import ms = require("ms");
 
 dotenv.config();
 
@@ -15,8 +15,8 @@ const generateToken = (userCredentials: ILoginCredentials) => {
 	);
 	const response = {
 		access_token: token,
-		expires_in: process.env.EXPIRESIN,
-		token_type: "Bearer",
+		expires_in: ms(process.env.EXPIRESIN!),
+		cookie_key: "access_token",
 	};
 	return response;
 };

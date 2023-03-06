@@ -1,5 +1,4 @@
-import { utils } from "../utils/utils.js";
-import { pageService } from "../services/pages.service.js";
+
 
 const tbody = document.getElementById("table-pages");
 init();

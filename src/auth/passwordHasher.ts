@@ -2,24 +2,18 @@ import bcrypt from "bcrypt";
 import ILoginCredentials from "../models/ILoginCredentials";
 import { authenticatedUsers } from "../db/db";
 import { Response } from "express";
+import dbContext from "../db/dbContext";
 
-export const passwordHasher = (req: ILoginCredentials, res: Response) => {
+export const passwordHasher = async (req: ILoginCredentials, res: Response) => {
 	try {
 		const hashedPassword = bcrypt.hashSync(req.password, 10);
-		const dbUser: ILoginCredentials = {
+		const userEntity: ILoginCredentials = {
 			username: req.username,
 			password: hashedPassword,
 		};
-		const authUserIndex: number = authenticatedUsers.findIndex(
-			(item) => item.username == req.username
-		);
-		if (authUserIndex == -1) {
-			authenticatedUsers.push(req);
-		} else {
-			authenticatedUsers[authUserIndex] = dbUser;
-		}
+		await dbContext.insertUser(userEntity);
 		return hashedPassword;
 	} catch (error: any) {
-		console.log(error.message);
+		console.log("passwordHasher ", error.message);
 	}
 };

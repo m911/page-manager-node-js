@@ -4,7 +4,7 @@ import authenticateToken from "../middleware/authenticateToken";
 import ILoginCredentials from "../models/ILoginCredentials";
 import generateToken from "../auth/generateToken";
 import { checkValidLogin } from "../middleware/checkValidLogin";
-import dbContext from "../db/query2";
+import dbContext from "../db/dbContext";
 import { renderNotFound, renderEjsFileNames } from "../utils/renderer";
 import IPage from "../models/IPage";
 
@@ -14,9 +14,13 @@ cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
 	res.render("cPanel.ejs");
 });
 
-cPanelRouter.get("/new", authenticateToken, (req: Request, res: Response) => {
-	renderEjsFileNames(["newPage.ejs"], res, { title: "Create New Page" });
-});
+cPanelRouter.get(
+	"/new",
+	// authenticateToken,
+	(req: Request, res: Response) => {
+		renderEjsFileNames(["newPage.ejs"], res, { title: "Create New Page" });
+	}
+);
 
 cPanelRouter.post("/new", (req: Request, res: Response) => {
 	const page: IPage = req.body;
