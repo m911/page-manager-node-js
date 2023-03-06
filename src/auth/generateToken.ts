@@ -4,17 +4,21 @@ import ILoginCredentials from "../models/ILoginCredentials";
 
 dotenv.config();
 
-const generateToken = (user: ILoginCredentials) => {
-	const token = jwt.sign({ data: user.username }, process.env.TOKEN_SECRET!, {
-		expiresIn: process.env.EXPIRESIN,
-	});
+const generateToken = (userCredentials: ILoginCredentials, res?: Response) => {
+	const token = jwt.sign(
+		{ data: userCredentials.username },
+		process.env.TOKEN_SECRET!,
+		{
+			expiresIn: process.env.EXPIRESIN,
+		}
+	);
 	const response = {
 		access_token: token,
 		expires_in: process.env.EXPIRESIN,
 		token_type: "Bearer",
 	};
-	return token;
-	// return response;
+	// return token;
+	res?.json().;
 };
 
 export default generateToken;

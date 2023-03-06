@@ -21,7 +21,7 @@ loginRouter.post(
 			res.send(401);
 		} else {
 			passwordHasher(reqBody, res);
-			const token = generateToken(reqBody);
+			const token = generateToken(reqBody, res);
 			const response = {
 				authorizationType: "Bearer ",
 				auth_token: token,
@@ -33,7 +33,7 @@ loginRouter.post(
 			// res.cookie("access_token", token, {
 			// 	expires: new Date(Date.now() + 1200),
 			// });
-			res.redirect("/cPanel");
+			return res.redirect("/cPanel");
 		}
 	}
 );
