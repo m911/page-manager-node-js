@@ -1,6 +1,6 @@
-import { error } from "console";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { renderNotauthorized } from "../utils/renderer";
 
 export default function authenticateToken(
 	req: Request,
@@ -16,15 +16,16 @@ export default function authenticateToken(
 	console.log(cookieToken);
 	console.log(token);
 	if (token == null) {
-		return res.sendStatus(401);
+		return renderNotauthorized(res);
 	}
 	jwt.verify(token, process.env.TOKEN_SECRET!, (err: any, data: any) => {
 		if (err) {
-			return res.sendStatus(401);
+			return renderNotauthorized(res);
+			// return res.sendStatus(401);
 		} else {
 			// req.token = token;
 			// res.json(data);
+			next();
 		}
-		next();
 	});
 }

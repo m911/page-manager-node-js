@@ -29,8 +29,12 @@ function renderServerError(res: Response) {
 function renderNotauthorized(res: Response) {
 	return res.render(pagesNames.notAuthorized);
 }
-function renderEjsFileNames(fileNames: string[], res: Response) {
-	return res.render(pagesNames.index, { fileNames });
+function renderEjsFileNames(
+	fileNames: string[],
+	res: Response,
+	opitons?: object
+) {
+	return res.render(pagesNames.index, { fileNames, ...opitons });
 }
 
 export {

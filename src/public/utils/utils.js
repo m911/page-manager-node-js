@@ -7,6 +7,11 @@ function addEventListener(element, event, cssClass, callback) {
 	});
 }
 
+function updateFieldValues(sourceElement, targetElement) {
+	targetElement[sourceElement.name] = sourceElement.value;
+}
+
 export const utils = {
 	addEventListener,
+	updateFieldValues,
 };

@@ -6,43 +6,22 @@ import generateToken from "../auth/generateToken";
 import { checkValidLogin } from "../middleware/checkValidLogin";
 import dbContext from "../db/query2";
 import { renderNotFound, renderEjsFileNames } from "../utils/renderer";
+import IPage from "../models/IPage";
 
 const cPanelRouter = Router();
 
-cPanelRouter.get(
-	"/",
-	// authenticateToken,
-	(req: Request, res: Response) => {
-		res.render("cPanel.ejs");
-	}
-);
+cPanelRouter.get("/", authenticateToken, (req: Request, res: Response) => {
+	res.render("cPanel.ejs");
+});
 
-//TODO: [PM-1] Move to login route
-cPanelRouter.post(
-	"/login",
-	checkValidLogin,
-	(req: Request, res: Response, next: NextFunction) => {
-		const reqBody: ILoginCredentials = req.body;
-		if (reqBody == null && !reqBody && reqBody) {
-			res.send(401);
-		} else {
-			passwordHasher(reqBody, res);
-			const token = generateToken(reqBody);
-			const response = {
-				authorizationType: "Bearer ",
-				auth_token: token,
-			};
-			res.cookie("access_token", token, {
-				expires: new Date(Date.now() + 1200),
-			});
-			res.send(response);
-		}
-	}
-);
+cPanelRouter.get("/new", authenticateToken, (req: Request, res: Response) => {
+	renderEjsFileNames(["newPage.ejs"], res, { title: "Create New Page" });
+});
 
-cPanelRouter.get("/new", (req: Request, res: Response) => {
-	const page = ["newPage.ejs"];
-	renderEjsFileNames(page, res);
+cPanelRouter.post("/new", (req: Request, res: Response) => {
+	const page: IPage = req.body;
+	dbContext.insertPage(page);
+	res.send(req.body);
 });
 
 cPanelRouter.delete("/:pageId", async (req: Request, res: Response) => {

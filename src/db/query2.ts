@@ -50,9 +50,27 @@ async function deletePage(id: number): Promise<number> {
 	}
 }
 
+//TODO: fix query
+async function insertPage(page: IPage): Promise<IPage> {
+	try {
+		await sql.connect(config);
+		const { title, metaDescription, pageContent, url } = page;
+		const result = await new sql.Request()
+			.query(`INSERT INTO PagesData (title, metaDescription, pageContent, url)
+			VALUES ('${title}', '${metaDescription}', '${pageContent}', '${url}');
+			SELECT * FROM PagesData WHERE url = '${url};
+			`);
+
+		return result.recordset.length > 0 ? result.recordset[0] : null;
+	} catch (error: any) {
+		throw new Error(`Error inserting page: ${error.message}`);
+	}
+}
+
 const dbContext = {
 	getPages,
 	getPageByUrl,
 	deletePage,
+	insertPage,
 };
 export default dbContext;

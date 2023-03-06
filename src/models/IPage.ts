@@ -1,9 +1,8 @@
 export default interface IPage {
 	id: number;
-	url: string;
-	metaDescription: string;
 	title: string;
-	header?: string;
+	metaDescription: string;
 	pageContent: string;
-	footer?: string;
+	url: string;
+	[Symbol.iterator](): any;
 }
