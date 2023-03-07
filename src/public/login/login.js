@@ -15,19 +15,13 @@ function init() {
 }
 
 function addEventListeners() {
-	// utils.addEventListener(loginForm, "submit", "form-control", (e) => {
-	// 	e.preventDefault();
-	// 	e.stopPropagation();
-	// 	console.log(e.target);
-	// });
-
-	utils.addEventListener(loginForm, "input", "form-control", (e) => {
-		console.log(e.target.value);
-		utils.updateFieldValues(e.target, loginCredentials);
-		console.log(loginCredentials);
+	loginForm.addEventListener("submit", (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		pageService.getToken(loginCredentials);
 	});
 
-	// form.addEventListener("submit", async (e) => {
-	// 	// const getToken = await fetch("/login", { method: "POST" });
-	// });
+	utils.addEventListener(loginForm, "input", "form-control", (e) => {
+		utils.updateFieldValues(e, loginCredentials);
+	});
 }

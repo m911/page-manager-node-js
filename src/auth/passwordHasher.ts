@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import ILoginCredentials from "../models/ILoginCredentials";
-import { authenticatedUsers } from "../db/db";
 import { Response } from "express";
 import dbContext from "../db/dbContext";
 

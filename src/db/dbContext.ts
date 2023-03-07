@@ -96,7 +96,7 @@ async function insertUser(user: ILoginCredentials): Promise<IPage> {
 		return result.recordset.length > 0 ? result.recordset[0] : null;
 	} catch (error: any) {
 		console.error("getPageByUrl " + error);
-		throw new Error(`Error getting page from url: ${username} error.message`);
+		throw new Error(`Error inserting user: ${user.username} error.message`);
 	}
 }
 

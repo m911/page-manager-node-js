@@ -16,17 +16,22 @@ loginRouter.post(
 	"/",
 	checkValidLogin,
 	(req: Request, res: Response, next: NextFunction) => {
-		const reqBody: ILoginCredentials = req.body;
+		const reqBody = req.body;
+		console.log(reqBody);
+		// console.log(JSON.parse(reqBody));
 		if (reqBody == null && !reqBody && reqBody) {
 			res.send(401);
 		} else {
 			passwordHasher(reqBody, res);
 			const token = generateToken(reqBody);
 
-			res.cookie("access_token", token, {
+			res.cookie("access_token", token.access_token, {
 				expires: new Date(Date.now() + token.expires_in),
 			});
-			res.redirect("/cPanel");
+			res.send({
+				statusCode: 200,
+				message: "Successfully logged in",
+			});
 		}
 	}
 );

@@ -1,20 +1,41 @@
-function getPages() {
-	return fetch("/api/pages").then((res) => res.json());
+const config = {
+	BASE_URL: "http://localhost:3000",
+};
+
+async function getPages() {
+	const res = await fetch(`${config.BASE_URL}/api/pages`);
+	return await res.json();
 }
 
-function deletePage(id) {
-	return fetch(`/cPanel/${id}`, { method: "DELETE" }).then((res) => res.json());
+async function deletePage(id) {
+	const res = await fetch(`${config.BASE_URL}/cPanel/${id}`, {
+		method: "DELETE",
+	});
+	return await res.json();
 }
 
-function postPage(body) {
-	return fetch("/cPanel/new", {
+async function postPage(body) {
+	const res = await fetch(`${config.BASE_URL}/cPanel/new`, {
 		method: "post",
 		body: body,
-	}).then((res) => res.json());
+	});
+	return await res.json();
+}
+
+async function getToken(body) {
+	await fetch(`${config.BASE_URL}/login`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		method: "post",
+		body: JSON.stringify(body),
+	});
+	await location.assign("/cPanel");
 }
 
 export const pageService = {
 	getPages,
 	deletePage,
-	postPage
+	postPage,
+	getToken,
 };

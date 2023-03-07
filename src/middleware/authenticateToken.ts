@@ -7,21 +7,16 @@ export default function authenticateToken(
 	res: Response,
 	next: NextFunction
 ) {
-	const authHeader = req.headers.authorization;
-	const queryParam = req.query.access_token?.toString();
-	const cookieToken = req.cookies?.get("access_token");
-	console.log(cookieToken);
-	const token =
-		(authHeader && authHeader.split(" ")[1]) || queryParam || cookieToken;
-	console.log(cookieToken);
-	console.log(token);
-	if (token == null) {
+	const cookieToken = req.signedCookies;
+
+	console.log("access_token cookie is " + cookieToken);
+
+	if (cookieToken == null) {
 		return renderNotauthorized(res);
 	}
-	jwt.verify(token, process.env.TOKEN_SECRET!, (err: any, data: any) => {
+	jwt.verify(cookieToken, process.env.TOKEN_SECRET!, (err: any, data: any) => {
 		if (err) {
 			return renderNotauthorized(res);
-			// return res.sendStatus(401);
 		} else {
 			// req.token = token;
 			// res.json(data);

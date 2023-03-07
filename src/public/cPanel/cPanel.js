@@ -1,4 +1,5 @@
-
+import { pageService } from "../services/pages.service.js";
+import { utils } from "../utils/utils.js";
 
 const tbody = document.getElementById("table-pages");
 init();
@@ -35,11 +36,11 @@ async function deletePage(pageId) {
 
 function forgePageRowHtml(page) {
 	return `<tr>
-                    <td>${page.id}</td>
-                    <td>${page.url}</td>
-                    <td>${page.title}</td>
-                    <td>
-                        <button type="button" class="btn-delete" page-id="${page.id}">DELETE</button>
-                    </td>
-                </tr>`;
+				<td>${page.id}</td>
+				<td>${page.url}</td>
+				<td>${page.title}</td>
+				<td>
+					<button type="button" class="btn btn-danger btn-delete" page-id="${page.id}">DELETE</button>
+				</td>
+			</tr>`;
 }

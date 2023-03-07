@@ -1,61 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<div>
+    <h2>Welcome to the Control panel of Pages</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="https://cdn.jsdelivr.net/npm/string-strip-html/dist/string-strip-html.umd.js"></script>
+    <div class="col-lg-12 text-center">
 
-    <title>
-        cPanel
-    </title>
+        <div class="row mb-3">
+            <a href="/" class="btn btn-success d-flex align-items-center">
+                Home
+            </a>
+        </div>
 
-</head>
+        <div class="row mb-3">
+            <a href="cpanel/new" class="btn btn-success d-flex align-items-center"><i
+                    class="material-icons mr-2">add_circle</i>
+                New Page
+            </a>
+        </div>
 
-<body>
-    <div class="container">
-        <h2>Welcome to the Control panel of Pages</h2>
-
-        <div class="col-lg-12 text-center">
-
-            <div class="row mb-3">
-                <a href="/" class="btn btn-success d-flex align-items-center">
-                    Home
-                </a>
-            </div>
-
-            <div class="row mb-3">
-                <a href="cpanel/new" class="btn btn-success d-flex align-items-center"><i
-                        class="material-icons mr-2">add_circle</i>
-                    New Page
-                </a>
-            </div>
-
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Url</th>
-                            <th scope="col">Title</th>
-                            <th sscope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-pages">
-                    </tbody>
-                </table>
-            </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Title</th>
+                        <th sscope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-pages">
+                </tbody>
+            </table>
         </div>
     </div>
-    <script type="module" src="/utils/utils.js"></script>
-    <script type="module" src="/services/pages.service.js"></script>
-    <script type="module" src="/cPanel/cPanel.js"></script>
-</body>
-
-</html>
+</div>
+<script type="module" src="/utils/utils.js"></script>
+<script type="module" src="/services/pages.service.js"></script>
+<script type="module" src="/cPanel/cPanel.js"></script>
