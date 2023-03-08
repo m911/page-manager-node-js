@@ -1,6 +1,6 @@
 import express from "express";
 import routes from "./routes";
-import { CONFIG } from "./config/CONFIG";
+import { CONFIG } from "./config/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
