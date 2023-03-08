@@ -11,11 +11,13 @@ const config = {
 	},
 };
 
-async function getAll(table: string): Promise<IPage[]> {
+async function getAll(table: string): Promise<any[]> {
 	const err = await sql.connect(config);
-	if (err) console.error("getPages " + err);
+	if (err) console.error("Dbcontext getPages " + err);
 
-	const result = await new sql.Request().query(`SELECT * FROM ${table}`);
+	const result = await new sql.Request()
+		.input("table", table)
+		.query(`SELECT * FROM ${table}`);
 	return result.recordset;
 }
 
@@ -29,7 +31,7 @@ async function getPageByUrl(url: string): Promise<IPage> {
 
 		return result.recordset.length > 0 ? result.recordset[0] : null;
 	} catch (error: any) {
-		console.error("getPageByUrl " + error);
+		console.error("Dbcontext getPageByUrl " + error);
 		throw new Error(`Error getting page from url: ${url} error.message`);
 	}
 }
@@ -79,7 +81,7 @@ async function getUser(username: string): Promise<IPage> {
 		return result.recordset.length > 0 ? result.recordset[0] : null;
 	} catch (error: any) {
 		console.error("getPageByUrl " + error);
-		throw new Error(`Error getting page from url: ${username} error.message`);
+		throw new Error(`Error getting user: ${username} error.message`);
 	}
 }
 

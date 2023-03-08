@@ -30,7 +30,7 @@ async function getToken(body) {
 		method: "post",
 		body: JSON.stringify(body),
 	});
-	await location.assign("/cPanel");
+	location.href = "/cPanel";
 }
 
 export const pageService = {
