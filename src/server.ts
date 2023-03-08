@@ -20,8 +20,8 @@ app.use(routes);
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
-// app.listen(CONFIG.PORT, () => {
-// 	console.log(`Server is running on port: ${CONFIG.PORT}`);
-// });
+app.listen(CONFIG.PORT, () => {
+	console.log(`Server is running on port: ${CONFIG.PORT}`);
+});
 
 // module.exports = app;
