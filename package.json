@@ -6,11 +6,12 @@
 	"scripts": {
 		"build": "tsc -p .",
 		"start": "node build/server.js",
-		"dev": "nodemon src/server.ts"
+		"dev": "nodemon src/server.ts",
+		"deploy": "serverless deploy"
 	},
 	"repository": {
 		"type": "git",
-		"url": "page-manager-node"
+		"url": "page-manager-node",
 	},
 	"author": "Dimitar Varzilov",
 	"license": "ISC",
@@ -30,6 +31,7 @@
 		"mssql": "^9.1.1",
 		"nodemon": "^2.0.21",
 		"prettier": "^2.8.4",
+		"serverless-http": "^3.1.1",
 		"string-strip-html": "^13.2.0"
 	},
 	"devDependencies": {
