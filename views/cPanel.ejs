@@ -1,0 +1,37 @@
+<div>
+    <h2>Welcome to the Control panel of Pages</h2>
+
+    <div class="col-lg-12 text-center">
+
+        <div class="row mb-3">
+            <a href="/" class="btn btn-success d-flex align-items-center">
+                Home
+            </a>
+        </div>
+
+        <div class="row mb-3">
+            <a href="cpanel/new" class="btn btn-success d-flex align-items-center"><i
+                    class="material-icons mr-2">add_circle</i>
+                New Page
+            </a>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Title</th>
+                        <th sscope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-pages">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="module" src="/utils/utils.js"></script>
+<script type="module" src="/services/pages.service.js"></script>
+<script type="module" src="/cPanel/cPanel.js"></script>

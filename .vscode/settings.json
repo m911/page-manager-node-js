@@ -1,0 +1,8 @@
+{
+	"liveServer.settings.port": 5501,
+	"dataworkspace.excludedProjects": [
+		"src/db/server/DatabaseProjectNodeDb/DatabaseProjectNodeDb.sqlproj"
+	],
+	"appService.defaultWebAppToDeploy": "undefined/subscriptions/d1fbed3b-2409-451a-8b84-78820751e4d2/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/page-manager-nodeJs",
+	"appService.deploySubpath": "."
+}
