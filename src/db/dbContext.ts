@@ -55,6 +55,7 @@ async function deletePage(id: number): Promise<number> {
 
 //TODO: fix query
 async function insertPage(page: IPage): Promise<IPage> {
+	console.log(page);
 	try {
 		await sql.connect(config);
 		const { title, metaDescription, pageContent, url } = page;

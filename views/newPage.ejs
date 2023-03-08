@@ -2,7 +2,7 @@
 <script src="https://cdn.tiny.cloud/1/pg67egwdb9sr87jozdy2mlaaqrtyyzuvpztvn37c0gg5wxwc/tinymce/6/tinymce.min.js"
     referrerpolicy="origin"></script>
 
-<form action="/cPanel/new" method="post" class="row g-3" id="newPageForm">
+<form class="row g-3" id="newPageForm">
     <div class="mb-3">
         <label for="titleFormInput" class="form-label">Title</label>
         <input type="text" class="form-control" id="titleFormInput" name="title" required>
@@ -19,7 +19,7 @@
         <label for="titleFormInput" class="form-label">URL</label>
         <input type="text" class="form-control" id="titleFormInput"
             placeholder="Enter desired url in lowercase without spaces between and after. Ex. 'examplepage'" name="url"
-            required pattern="[a-z]+">
+            required pattern="[a-z0-9]+">
     </div>
     <div class="mb-3">
         <a href="/cPanel" type="reset" class="btn btn-warning mb-3">Back</a>
