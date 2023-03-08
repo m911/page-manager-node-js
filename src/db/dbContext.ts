@@ -64,12 +64,12 @@ async function insertPage(page: IPage): Promise<any> {
 			.query(`INSERT INTO PagesData (title, metaDescription, pageContent, url)
 			VALUES ('${title}', '${metaDescription}', '${pageContent}', '${url}')
 			`);
-		const result2 = await new sql.Request().query(
-			`SELECT * FROM PagesData WHERE url = '${url}`
-		);
-		console.log(result);
+		// const result2 = await new sql.Request().query(
+		// 	`SELECT * FROM PagesData WHERE url = '${url}`
+		// );
+		// console.log(result);
 		return;
-		return result2.recordset.length > 0 ? result.recordset[0] : null;
+		// return result2.recordset.length > 0 ? result.recordset[0] : null;
 	} catch (error: any) {
 		throw new Error(`Error inserting page: ${error.message}`);
 	}
